@@ -234,10 +234,10 @@ void UVoxelErosion::Init_RenderThread()
 	check(IsInRenderingThread());
 
 	FRHIResourceCreateInfo CreateInfo;
-	const uint32 Flags = TexCreate_ShaderResource | TexCreate_UAV;
+	const uint64_t Flags = TexCreate_ShaderResource | TexCreate_UAV;
 
 #define CREATE_TEXTURE(Name, SizeX) \
-	Name = RHICreateTexture2D(SizeX * RealSize, RealSize, PF_R32_FLOAT, 1, 1, Flags, CreateInfo); \
+	Name = RHICreateTexture2D(SizeX * RealSize, RealSize, PF_R32_FLOAT, 1, 1, (ETextureCreateFlags)Flags, CreateInfo); \
 	Name##UAV = RHICreateUnorderedAccessView(Name); \
 
 	CREATE_TEXTURE(RainMap, 1);
